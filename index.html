@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding RSVP - Suphattra & Nithit (Nay & Earn)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Mali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage-light: #ccd5cc;
+      --sage-dark: #abb8ab;
+      --dusty-pink: #debcc0;
+      --cream-border: #f7f1e8;
+      --berry-red: #8b2252;
+      --forest-green: #385a32;
+      --gold-sparkle: #f3d459;
+      --text-dark: #2c4727;
+      --white-soft: #fffcf9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Mali', cursive, sans-serif;
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding: 30px 15px;
+      /* Harlequin diamond pattern matching the invitation */
+      background-color: var(--sage-light);
+      background-image: 
+        linear-gradient(115deg, var(--sage-dark) 25%, transparent 25%), 
+        linear-gradient(245deg, var(--sage-dark) 25%, transparent 25%), 
+        linear-gradient(115deg, transparent 75%, var(--sage-dark) 75%), 
+        linear-gradient(245deg, transparent 75%, var(--sage-dark) 75%);
+      background-size: 70px 120px;
+      background-position: 0 0, 0 0, 35px 60px, 35px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-wrapper {
+      position: relative;
+      max-width: 650px;
+      width: 100%;
+      margin: 20px auto;
+    }
+
+    /* Sparkle Decorations */
+    .sparkle {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .sparkle-tl-1 { top: -18px; left: -15px; width: 55px; height: 55px; }
+    .sparkle-tl-2 { top: 25px; left: 35px; width: 32px; height: 32px; }
+    .sparkle-tl-3 { top: -10px; left: 55px; width: 25px; height: 25px; }
+    .sparkle-br-1 { bottom: -15px; right: -10px; width: 55px; height: 55px; }
+    .sparkle-br-2 { bottom: 25px; right: 45px; width: 30px; height: 30px; }
+
+    /* Main Card with Scallop/Wavy Feel */
+    .invitation-card {
+      background-color: var(--dusty-pink);
+      border: 6px solid var(--cream-border);
+      border-radius: 55px;
+      padding: 40px 32px;
+      box-shadow: 
+        0 12px 30px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .sub-heading {
+      font-size: 1.05rem;
+      color: var(--forest-green);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .couple-names {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+
+    .person-block {
+      text-align: center;
+    }
+
+    .person-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--berry-red);
+      line-height: 1.1;
+    }
+
+    .person-surname {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.55rem;
+      color: var(--berry-red);
+      margin-top: 2px;
+    }
+
+    .person-nickname {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: var(--berry-red);
+      margin-top: 2px;
+    }
+
+    .birds-icon {
+      font-size: 2rem;
+      color: var(--forest-green);
+      padding: 0 5px;
+    }
+
+    .invite-line {
+      font-size: 1.1rem;
+      color: var(--forest-green);
+      margin: 14px 0 14px;
+      font-weight: 600;
+    }
+
+    /* Date & Venue Highlight Box */
+    .event-info-card {
+      background: rgba(255, 252, 249, 0.65);
+      border: 2px solid var(--cream-border);
+      border-radius: 22px;
+      padding: 14px 20px;
+      margin: 0 auto 20px;
+      max-width: 480px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .event-date {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--berry-red);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .event-venue {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--forest-green);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.84rem;
+      color: var(--berry-red);
+      background-color: var(--cream-border);
+      padding: 4px 14px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(139, 34, 82, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .map-link:hover {
+      background-color: var(--berry-red);
+      color: #fff;
+    }
+
+    /* Ribbon Banner */
+    .ribbon-banner {
+      display: inline-block;
+      background-color: var(--cream-border);
+      padding: 6px 32px;
+      border-radius: 8px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--forest-green);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .timeline-box {
+      background: rgba(255, 252, 249, 0.45);
+      border-radius: 20px;
+      padding: 14px 20px;
+      display: inline-block;
+      text-align: left;
+      font-size: 0.92rem;
+      color: var(--forest-green);
+      margin-bottom: 16px;
+    }
+
+    .timeline-row {
+      margin: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dress-code-section {
+      margin-top: 6px;
+    }
+
+    .dress-code-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.65rem;
+      color: var(--forest-green);
+      margin-bottom: 8px;
+    }
+
+    .color-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.7);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 2px dashed rgba(56, 90, 50, 0.25);
+      margin: 25px 0;
+    }
+
+    /* Form Sections */
+    .form-section {
+      background: rgba(255, 252, 249, 0.65);
+      border: 2px solid var(--cream-border);
+      border-radius: 24px;
+      padding: 22px 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--berry-red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1.5px solid rgba(139, 34, 82, 0.15);
+      padding-bottom: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .row-2col {
+        grid-template-columns: 1fr;
+      }
+      .invitation-card {
+        padding: 30px 18px;
+        border-radius: 38px;
+      }
+    }
+
+    label.field-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 7px;
+      color: var(--forest-green);
+    }
+
+    .required-star {
+      color: var(--berry-red);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #cbbeb5;
+      border-radius: 14px;
+      background-color: var(--white-soft);
+      font-family: 'Mali', cursive, sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--berry-red);
+      box-shadow: 0 0 0 3px rgba(139, 34, 82, 0.12);
+    }
+
+    /* Radio & Checkbox Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.94rem;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 90, 50, 0.12);
+      transition: background 0.2s;
+      flex-wrap: wrap;
+    }
+
+    .option-item:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      accent-color: var(--berry-red);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .inline-input {
+      width: 75px !important;
+      padding: 4px 8px !important;
+      text-align: center;
+      margin: 0 4px;
+    }
+
+    .inline-text-input {
+      flex: 1;
+      min-width: 180px;
+      padding: 6px 10px !important;
+      margin-top: 4px;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 14px 24px;
+      background-color: var(--forest-green);
+      color: #fff;
+      font-family: 'Mali', cursive, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(56, 90, 50, 0.28);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: #2c4727;
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      background-color: #8c9e88;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Status Message */
+    #statusMessage {
+      display: none;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .status-success {
+      background-color: #e5f4e3;
+      color: #275922;
+      border: 2px solid #a3d49c;
+    }
+
+    .status-error {
+      background-color: #fce8e8;
+      color: #9c2525;
+      border: 2px solid #f2a9a9;
+    }
+
+    .hidden-section {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-wrapper">
+    <!-- Gold Four-Point Stars Matching Card Theme -->
+    <svg class="sparkle sparkle-tl-1" viewBox="0 0 100 100">
+      <path d="M50 0 Q50 50 100 50 Q50 50 50 100 Q50 50 0 50 Q50 50 50 0 Z" fill="#f3d459"/>
+    </svg>
+    <svg class="sparkle sparkle-tl-2" viewBox="0 0 100 100">
+      <path d="M50 0 Q50 50 100 50 Q50 50 50 100 Q50 50 0 50 Q50 50 50 0 Z" fill="#f3d459"/>
+    </svg>
+    <svg class="sparkle sparkle-tl-3" viewBox="0 0 100 100">
+      <path d="M50 0 Q50 50 100 50 Q50 50 50 100 Q50 50 0 50 Q50 50 50 0 Z" fill="#f3d459"/>
+    </svg>
+    <svg class="sparkle sparkle-br-1" viewBox="0 0 100 100">
+      <path d="M50 0 Q50 50 100 50 Q50 50 50 100 Q50 50 0 50 Q50 50 50 0 Z" fill="#f3d459"/>
+    </svg>
+    <svg class="sparkle sparkle-br-2" viewBox="0 0 100 100">
+      <path d="M50 0 Q50 50 100 50 Q50 50 50 100 Q50 50 0 50 Q50 50 50 0 Z" fill="#f3d459"/>
+    </svg>
+
+    <div class="invitation-card">
+      <!-- Header Info from Invitation Card -->
+      <div class="header-section">
+        <p class="sub-heading">Along with their families</p>
+        
+        <div class="couple-names">
+          <div class="person-block">
+            <div class="person-name">Suphattra</div>
+            <div class="person-surname">Sae-wan</div>
+            <div class="person-nickname">(nay)</div>
+          </div>
+
+          <div class="birds-icon">🕊️💚🕊️</div>
+
+          <div class="person-block">
+            <div class="person-name">Nithit</div>
+            <div class="person-surname">Pumtien</div>
+            <div class="person-nickname">(earn)</div>
+          </div>
+        </div>
+
+        <p class="invite-line">Joyfully invite you to their wedding</p>
+
+        <!-- Added Date & Venue Information -->
+        <div class="event-info-card">
+          <div class="event-date">
+            <span>📅 วันที่ 23 มกราคม 2569 (23 January 2026)</span>
+          </div>
+          <div class="event-venue">
+            <span>📍 สถานที่ : AUBE VENUE, RATCHAPRUEK, BKK</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=AUBE+VENUE+RATCHAPRUEK+BKK" target="_blank" rel="noopener noreferrer" class="map-link">
+            🗺️ เปิดแผนที่ Google Maps
+          </a>
+        </div>
+
+        <div>
+          <div class="ribbon-banner">Timeline</div>
+        </div>
+
+        <div class="timeline-box">
+          <div class="timeline-row">
+            <strong>10.30 AM.</strong> 🖼️ Registration
+          </div>
+          <div class="timeline-row">
+            <strong>11.00 AM.</strong> 🍽️ Wedding Reception &amp; Lunch (Cocktail)
+          </div>
+        </div>
+
+        <div class="dress-code-section">
+          <div class="dress-code-title">Dress Code</div>
+          <div class="color-dots">
+            <span class="dot" style="background-color: #c5d4a5;" title="Light Sage"></span>
+            <span class="dot" style="background-color: #5c754b;" title="Olive Green"></span>
+            <span class="dot" style="background-color: #ebcbd0;" title="Blush Pink"></span>
+            <span class="dot" style="background-color: #ede6d6;" title="Cream"></span>
+            <span class="dot" style="background-color: #8c6d53;" title="Earth Brown"></span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- RSVP Form -->
+      <form id="rsvpForm">
+        <!-- 1. ข้อมูลพื้นฐานของผู้ร่วมงาน (Essential Info) -->
+        <div class="form-section">
+          <div class="section-title">✨ 1. ข้อมูลพื้นฐานของผู้ร่วมงาน (Essential Info)</div>
+          
+          <div class="row-2col form-group">
+            <div>
+              <label class="field-label" for="firstName">ชื่อ (First Name) <span class="required-star">*</span></label>
+              <input type="text" id="firstName" name="firstName" placeholder="กรอกชื่อจริง" required>
+            </div>
+            <div>
+              <label class="field-label" for="lastName">นามสกุล (Last Name) <span class="required-star">*</span></label>
+              <input type="text" id="lastName" name="lastName" placeholder="กรอกนามสกุล" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label" for="nickname">ชื่อเล่น / ฉายา (Nickname) <span class="required-star">*</span></label>
+            <input type="text" id="nickname" name="nickname" placeholder="เช่น เนย์, เอิร์น, พี่ก้องแก๊งมัธยม" required>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">ความสัมพันธ์กับบ่าวสาว <span class="required-star">*</span></label>
+            <div class="options-list">
+              <label class="option-item">
+                <input type="radio" name="relationship" value="เพื่อนฝ่ายเจ้าสาว" required>
+                <span>เพื่อนฝ่ายเจ้าสาว</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="relationship" value="เพื่อนฝ่ายเจ้าบ่าว">
+                <span>เพื่อนฝ่ายเจ้าบ่าว (เจ้าชาย)</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="relationship" value="ญาติฝ่ายเจ้าสาว">
+                <span>ญาติฝ่ายเจ้าสาว</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="relationship" value="ญาติฝ่ายเจ้าบ่าว">
+                <span>ญาติฝ่ายเจ้าบ่าว (เจ้าชาย)</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="relationship" value="แขกผู้ใหญ่ / แขกของคุณพ่อคุณแม่">
+                <span>แขกผู้ใหญ่ / แขกของคุณพ่อคุณแม่</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. สถานะการเข้าร่วมงาน (Attendance Status) -->
+        <div class="form-section">
+          <div class="section-title">💌 2. สถานะการเข้าร่วมงาน (Attendance Status)</div>
+          <div class="form-group">
+            <label class="field-label">การเข้าร่วมงาน <span class="required-star">*</span></label>
+            <div class="options-list">
+              <label class="option-item">
+                <input type="radio" name="attendance" value="สามารถมาร่วมงานได้ (Attending)" id="attendYes" required checked>
+                <span>สามารถมาร่วมงานได้ (Attending)</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="attendance" value="ไม่สามารถมาร่วมงานได้ (Regretfully Decline)" id="attendNo">
+                <span>ไม่สามารถมาร่วมงานได้ (Regretfully Decline)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. จำนวนผู้ติดตาม และความต้องการพิเศษ (Guests & Preferences) -->
+        <div class="form-section" id="guestDetailsSection">
+          <div class="section-title">🥂 3. จำนวนผู้ติดตาม และความต้องการพิเศษ</div>
+          
+          <div class="form-group">
+            <label class="field-label">จำนวนผู้ติดตาม (Plus One / Family)</label>
+            <div class="options-list">
+              <label class="option-item">
+                <input type="radio" name="guestType" value="มาคนเดียว" id="guestAlone" checked>
+                <span>มาคนเดียว</span>
+              </label>
+              <label class="option-item">
+                <input type="radio" name="guestType" value="มาพร้อมผู้ติดตาม" id="guestWithOthers">
+                <span>มาพร้อมผู้ติดตาม จำนวน</span>
+                <input type="number" id="guestCount" name="guestCount" class="inline-input" min="1" max="20" value="1" disabled>
+                <span>คน</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" id="companionNamesGroup" style="display: none;">
+            <label class="field-label" for="companionNames">ชื่อผู้ติดตาม</label>
+            <input type="text" id="companionNames" name="companionNames" placeholder="ระบุชื่อเล่นหรือชื่อ-นามสกุลของผู้ติดตาม">
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">ข้อจำกัดเรื่องอาหาร / อาหารที่แพ้ (เลือกได้มากกว่า 1 ข้อ)</label>
+            <div class="options-list">
+              <label class="option-item">
+                <input type="checkbox" name="dietary" value="อาหารทั่วไป (รับได้หมด)" checked>
+                <span>อาหารทั่วไป (รับได้หมด)</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" name="dietary" value="อาหารมังสวิรัติ / เจ">
+                <span>อาหารมังสวิรัติ / เจ</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" name="dietary" value="อาหารฮาลาล (Halal)">
+                <span>อาหารฮาลาล (Halal)</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" name="dietary" value="แพ้อาหาร" id="allergyCheck">
+                <span>แพ้อาหาร (โปรดระบุ):</span>
+                <input type="text" id="allergyDetail" name="allergyDetail" class="inline-text-input" placeholder="เช่น แพ้กุ้ง, แพ้ถั่ว, แพ้นมวัว" disabled>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">เด็กเล็ก / ผู้สูงอายุ</label>
+            <div class="options-list">
+              <label class="option-item">
+                <input type="checkbox" id="highChairCheck" name="specialNeeds" value="มีเด็กเล็ก">
+                <span>มีเด็กเล็ก (ต้องการเก้าอี้เด็ก High Chair</span>
+                <input type="number" id="highChairCount" name="highChairCount" class="inline-input" min="1" max="10" value="1" disabled>
+                <span>ตัว)</span>
+              </label>
+              <label class="option-item">
+                <input type="checkbox" id="wheelchairCheck" name="specialNeeds" value="มีผู้สูงอายุ / ผู้ใช้รถเข็น (ต้องการพื้นที่ Wheelchair)">
+                <span>มีผู้สูงอายุ / ผู้ใช้รถเข็น (ต้องการพื้นที่ Wheelchair)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. อวยพรบ่าวสาว (Wishes) -->
+        <div class="form-section">
+          <div class="section-title">💐 4. อวยพรบ่าวสาว (Wishes)</div>
+
+          <div class="form-group">
+            <label class="field-label" for="wishes">ข้อความอวยพรคู่บ่าวสาว 💖</label>
+            <textarea id="wishes" name="wishes" rows="4" placeholder="เขียนคำอวยพรให้กับ เนย์ & เอิร์น เพื่อเก็บเป็นความทรงจำดีๆ..."></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">ส่งแบบตอบรับเข้าร่วมงาน (Submit RSVP)</button>
+        <div id="statusMessage"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // นำ Web App URL ที่ได้จากการ Deploy Google Apps Script มาวางในเครื่องหมายคำพูดด้านล่าง
+    // =========================================================================
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwBBAtFnvE6Fk9vyp1nXpnK2RUSSKfXOZ3k0KjLc5JXgzlKmfurQit9tHsqs3ZKpgNZ/exec";
+
+    // การเปิด-ปิดส่วนจำนวนผู้ติดตามตามสถานะการมาร่วมงาน
+    const attendYes = document.getElementById('attendYes');
+    const attendNo = document.getElementById('attendNo');
+    const guestDetailsSection = document.getElementById('guestDetailsSection');
+
+    function toggleAttendanceSection() {
+      if (attendNo.checked) {
+        guestDetailsSection.classList.add('hidden-section');
+      } else {
+        guestDetailsSection.classList.remove('hidden-section');
+      }
+    }
+    attendYes.addEventListener('change', toggleAttendanceSection);
+    attendNo.addEventListener('change', toggleAttendanceSection);
+
+    // การเปิด-ปิดช่องกรอกจำนวนผู้ติดตามและชื่อผู้ติดตาม
+    const guestAlone = document.getElementById('guestAlone');
+    const guestWithOthers = document.getElementById('guestWithOthers');
+    const guestCount = document.getElementById('guestCount');
+    const companionNamesGroup = document.getElementById('companionNamesGroup');
+
+    function toggleGuestInputs() {
+      if (guestWithOthers.checked) {
+        guestCount.disabled = false;
+        companionNamesGroup.style.display = 'block';
+      } else {
+        guestCount.disabled = true;
+        companionNamesGroup.style.display = 'none';
+      }
+    }
+    guestAlone.addEventListener('change', toggleGuestInputs);
+    guestWithOthers.addEventListener('change', toggleGuestInputs);
+
+    // การเปิด-ปิดช่องระบุอาหารที่แพ้
+    const allergyCheck = document.getElementById('allergyCheck');
+    const allergyDetail = document.getElementById('allergyDetail');
+    allergyCheck.addEventListener('change', () => {
+      allergyDetail.disabled = !allergyCheck.checked;
+      if (allergyCheck.checked) allergyDetail.focus();
+    });
+
+    // การเปิด-ปิดช่องระบุจำนวนเก้าอี้เด็ก High Chair
+    const highChairCheck = document.getElementById('highChairCheck');
+    const highChairCount = document.getElementById('highChairCount');
+    highChairCheck.addEventListener('change', () => {
+      highChairCount.disabled = !highChairCheck.checked;
+    });
+
+    // การส่งข้อมูลไปยัง Google Sheet
+    const rsvpForm = document.getElementById('rsvpForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+    rsvpForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // รวบรวมข้อมูลจากฟอร์ม
+      const isAttending = attendYes.checked;
+      const isWithGuests = guestWithOthers.checked;
+
+      // รวบรวมข้อมูลอาหาร
+      const dietaryChecked = Array.from(document.querySelectorAll('input[name="dietary"]:checked'))
+        .map(cb => {
+          if (cb.value === 'แพ้อาหาร') {
+            return `แพ้อาหาร (${allergyDetail.value || 'ไม่ระบุรายละเอียด'})`;
+          }
+          return cb.value;
+        });
+
+      // รวบรวมข้อมูลเด็กเล็ก / ผู้สูงอายุ
+      const specialNeedsList = [];
+      if (highChairCheck.checked) {
+        specialNeedsList.push(`มีเด็กเล็ก (High Chair ${highChairCount.value} ตัว)`);
+      }
+      if (document.getElementById('wheelchairCheck').checked) {
+        specialNeedsList.push('มีผู้สูงอายุ / ผู้ใช้รถเข็น (ต้องการพื้นที่ Wheelchair)');
+      }
+
+      const payload = {
+        timestamp: new Date().toLocaleString('th-TH'),
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        nickname: document.getElementById('nickname').value.trim(),
+        relationship: document.querySelector('input[name="relationship"]:checked')?.value || '',
+        attendance: document.querySelector('input[name="attendance"]:checked')?.value || '',
+        guestType: isAttending ? (isWithGuests ? 'มาพร้อมผู้ติดตาม' : 'มาคนเดียว') : '-',
+        guestCount: (isAttending && isWithGuests) ? guestCount.value : (isAttending ? '0' : '-'),
+        companionNames: (isAttending && isWithGuests) ? document.getElementById('companionNames').value.trim() : '-',
+        dietary: isAttending ? (dietaryChecked.join(', ') || '-') : '-',
+        specialNeeds: isAttending ? (specialNeedsList.join(', ') || 'ไม่มี') : '-',
+        wishes: document.getElementById('wishes').value.trim() || '-'
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'กำลังบันทึกข้อมูล... ⏳';
+      statusMessage.style.display = 'none';
+
+      try {
+        if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
+          // โหมดจำลองการทำงานกรณีไม่ได้ใส่ URL ของ Apps Script
+          await new Promise(resolve => setTimeout(resolve, 900));
+          console.log("ข้อมูลที่เตรียมส่งเข้า Google Sheet:", payload);
+        } else {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
+
+        statusMessage.className = 'status-success';
+        statusMessage.innerHTML = '🎉 บันทึกข้อมูลเรียบร้อยแล้ว! ขอบคุณที่ร่วมเป็นส่วนหนึ่งในวันสำคัญของเนย์และเอิร์นนะคะ/ครับ 💖';
+        statusMessage.style.display = 'block';
+        rsvpForm.reset();
+        toggleAttendanceSection();
+        toggleGuestInputs();
+      } catch (error) {
+        statusMessage.className = 'status-error';
+        statusMessage.innerHTML = '❌ เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง';
+        statusMessage.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'ส่งแบบตอบรับเข้าร่วมงาน (Submit RSVP)';
+      }
+    });
+  </script>
+</body>
+</html>
